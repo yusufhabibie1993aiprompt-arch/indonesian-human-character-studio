@@ -1,0 +1,50 @@
+{
+  "id": "./",
+  "name": "Indonesian Human Character Studio",
+  "short_name": "Human Studio",
+  "description": "Builder karakter manusia Indonesia realistis dengan Character DNA, mega database, expression, outfit, scene, dan prompt generator.",
+  "lang": "id",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
+  "orientation": "any",
+  "background_color": "#f3eee7",
+  "theme_color": "#6c4632",
+  "categories": [
+    "productivity",
+    "photo",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Buka Character Studio",
+      "short_name": "Studio",
+      "url": "./",
+      "icons": [
+        {
+          "src": "./icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

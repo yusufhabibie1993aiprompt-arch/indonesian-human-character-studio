@@ -1,0 +1,11 @@
+PAKET MOBILE UPLOAD
+
+Upload 5 file ini ke root repository GitHub:
+- index.html
+- manifest.webmanifest
+- service-worker.js
+- icon-192.png
+- icon-512.png
+
+UPLOAD-HP.txt tidak wajib.
+Tidak perlu folder icons dan tidak perlu .nojekyll untuk paket ini.
