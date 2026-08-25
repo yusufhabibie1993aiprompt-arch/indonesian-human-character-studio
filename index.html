@@ -145,6 +145,19 @@ footer{max-width:1380px;margin:0 auto;padding:5px 18px 30px;color:var(--muted);f
     <div class="field full"><label>Aksesori</label><select id="aksesori"></select></div>
 
     <div class="sectionTitle">🎬 SCENE & PHOTOGRAPHY</div>
+    
+    <div class="field full">
+  <label>📱 Selfie Preset</label>
+  <select id="selfiePreset">
+    <option value="">Custom / Manual</option>
+    <option value="natural">Natural Indonesian Selfie</option>
+    <option value="cute">Cute Casual Selfie</option>
+    <option value="mirror">Mirror Selfie</option>
+    <option value="office">Office Break Selfie</option>
+    <option value="cafe">Cafe Selfie</option>
+    <option value="campus">Campus Selfie</option>
+  </select>
+    </div>
     <div class="field full"><label>Aktivitas</label><select id="aktivitas"></select></div>
     <div class="field full"><label>Lokasi</label><select id="lokasi"></select></div>
     <div class="field"><label>Waktu</label><select id="waktu"></select></div>
@@ -3542,7 +3555,93 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js').catch(err => console.warn('Service worker gagal:', err));
   });
 }
+const SELFIE_PRESETS = {
+  natural: {
+    aktivitas: "taking a casual selfie",
+    lighting: "soft natural daylight",
+    framing: "close-up portrait",
+    angle: "slightly high angle",
+    lens: "26mm smartphone front camera",
+    style: "realistic everyday smartphone photography"
+  },
 
+  cute: {
+    aktivitas: "taking a playful casual selfie with one hand near the chin",
+    lighting: "soft diffused indoor daylight",
+    framing: "tight close-up portrait",
+    angle: "slightly high angle",
+    lens: "26mm smartphone front camera",
+    style: "natural Indonesian social-media selfie photography"
+  },
+
+  mirror: {
+    aktivitas: "taking a mirror selfie with smartphone visible",
+    lighting: "natural indoor daylight",
+    framing: "half-body portrait",
+    angle: "eye-level angle",
+    lens: "24mm smartphone camera",
+    style: "realistic casual mirror selfie photography"
+  },
+
+  office: {
+    aktivitas: "taking a casual selfie during an office break",
+    lighting: "soft mixed office daylight",
+    framing: "chest-up portrait",
+    angle: "slightly high angle",
+    lens: "26mm smartphone front camera",
+    style: "realistic Indonesian office selfie"
+  },
+
+  cafe: {
+    aktivitas: "taking a relaxed selfie at a cafe",
+    lighting: "soft window light",
+    framing: "close-up portrait",
+    angle: "slightly high angle",
+    lens: "26mm smartphone front camera",
+    style: "casual lifestyle smartphone photography"
+  },
+
+  campus: {
+    aktivitas: "taking a casual selfie on campus",
+    lighting: "natural outdoor daylight",
+    framing: "close-up portrait",
+    angle: "slightly high angle",
+    lens: "26mm smartphone front camera",
+    style: "realistic Indonesian campus selfie"
+  }
+};
+
+function setSelfieField(id, value) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  let option = Array.from(el.options).find(
+    o => o.value === value || o.text === value
+  );
+
+  if (!option) {
+    option = new Option(value, value);
+    el.add(option);
+  }
+
+  el.value = value;
+}
+
+const selfiePresetEl = document.getElementById("selfiePreset");
+
+if (selfiePresetEl) {
+  selfiePresetEl.addEventListener("change", function () {
+    const preset = SELFIE_PRESETS[this.value];
+    if (!preset) return;
+
+    setSelfieField("aktivitas", preset.aktivitas);
+    setSelfieField("lighting", preset.lighting);
+    setSelfieField("framing", preset.framing);
+    setSelfieField("angle", preset.angle);
+    setSelfieField("lens", preset.lens);
+    setSelfieField("style", preset.style);
+  });
+}
 </script>
 </body>
 </html>
