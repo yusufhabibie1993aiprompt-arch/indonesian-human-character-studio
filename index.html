@@ -161,6 +161,18 @@ footer{max-width:1380px;margin:0 auto;padding:5px 18px 30px;color:var(--muted);f
 <option value="grid4_beauty">4-Grid Beauty Selfie</option>
   </select>
     </div>
+    <div class="field full">
+  <label>🔞 Adult Glamour Preset — 18+ Only</label>
+  <select id="adultGlamourPreset">
+    <option value="">Off / Custom</option>
+    <option value="raised_arm">Raised-Arm Glamour</option>
+    <option value="smooth_thigh">Smooth-Thigh Pose</option>
+    <option value="curvy_neckline">Curvy Deep-Neckline Selfie</option>
+    <option value="mirror_glamour">Mirror Body Glamour</option>
+    <option value="sofa_glamour">Relaxed Sofa Glamour</option>
+    <option value="bust_portrait">Bust-Focused Glamour Portrait</option>
+  </select>
+</div>
     <div class="field full"><label>Aktivitas</label><select id="aktivitas"></select></div>
     <div class="field full"><label>Lokasi</label><select id="lokasi"></select></div>
     <div class="field"><label>Waktu</label><select id="waktu"></select></div>
@@ -3685,6 +3697,96 @@ if (selfiePresetEl) {
   preset.style + ", clean 2x2 equal grid collage, four equal selfie panels, exact same person in all four panels, same outfit, same hairstyle, same lighting, same background, only expression and head angle change"
 );
 }
+  });
+}
+  const adultGlamourPresetEl = document.getElementById("adultGlamourPreset");
+
+const ADULT_GLAMOUR_PRESETS = {
+  raised_arm: {
+    aktivitas: "posing confidently with one arm raised",
+    lighting: "soft flattering indoor daylight",
+    framing: "medium close-up glamour portrait",
+    angle: "slightly high angle",
+    lens: "35mm smartphone portrait perspective",
+    style: "adult fashion glamour photography, sleeveless outfit, visible underarm, non-explicit"
+  },
+
+  smooth_thigh: {
+    aktivitas: "seated relaxed glamour pose with legs prominently visible",
+    lighting: "soft flattering indoor daylight",
+    framing: "three-quarter seated portrait",
+    angle: "eye-level angle",
+    lens: "35mm natural smartphone perspective",
+    style: "adult fashion glamour photography, tasteful short outfit, smooth thighs visible, non-explicit"
+  },
+
+  curvy_neckline: {
+    aktivitas: "taking a confident adult glamour selfie",
+    lighting: "soft flattering daylight",
+    framing: "chest-up glamour selfie",
+    angle: "slightly high angle",
+    lens: "26mm smartphone front camera",
+    style: "adult fashion glamour photography, curvy natural proportions, low neckline, visible cleavage, fully clothed, non-explicit"
+  },
+
+  mirror_glamour: {
+    aktivitas: "taking a confident mirror selfie",
+    lighting: "soft indoor mirror lighting",
+    framing: "three-quarter mirror portrait",
+    angle: "eye-level angle",
+    lens: "24mm smartphone camera",
+    style: "adult mirror glamour photography, fitted body-conscious outfit, fully clothed, non-explicit"
+  },
+
+  sofa_glamour: {
+    aktivitas: "relaxing on a sofa in a confident glamour pose",
+    lighting: "soft warm indoor light",
+    framing: "three-quarter seated portrait",
+    angle: "slightly high angle",
+    lens: "35mm natural perspective",
+    style: "adult casual glamour photography, fitted outfit, relaxed feminine pose, non-explicit"
+  },
+
+  bust_portrait: {
+    aktivitas: "posing for an adult glamour portrait",
+    lighting: "soft flattering portrait light",
+    framing: "chest-up portrait",
+    angle: "eye-level angle",
+    lens: "50mm natural portrait perspective",
+    style: "adult fashion glamour portrait, fuller bust, low neckline, fully clothed, non-explicit"
+  }
+};
+
+function getCharacterAgeNumber() {
+  const usiaEl = document.getElementById("usia");
+  if (!usiaEl) return null;
+
+  const text = String(usiaEl.value || usiaEl.options?.[usiaEl.selectedIndex]?.text || "");
+  const match = text.match(/\d+/);
+  return match ? parseInt(match[0], 10) : null;
+}
+
+if (adultGlamourPresetEl) {
+  adultGlamourPresetEl.addEventListener("change", function () {
+    if (!this.value) return;
+
+    const age = getCharacterAgeNumber();
+
+    if (age === null || age < 18) {
+      alert("Adult Glamour Preset hanya tersedia untuk karakter usia 18 tahun ke atas.");
+      this.value = "";
+      return;
+    }
+
+    const preset = ADULT_GLAMOUR_PRESETS[this.value];
+    if (!preset) return;
+
+    setSelfieField("aktivitas", preset.aktivitas);
+    setSelfieField("lighting", preset.lighting);
+    setSelfieField("framing", preset.framing);
+    setSelfieField("angle", preset.angle);
+    setSelfieField("lens", preset.lens);
+    setSelfieField("style", preset.style);
   });
 }
 </script>
