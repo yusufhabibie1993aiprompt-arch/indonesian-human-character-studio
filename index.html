@@ -156,6 +156,9 @@ footer{max-width:1380px;margin:0 auto;padding:5px 18px 30px;color:var(--muted);f
     <option value="office">Office Break Selfie</option>
     <option value="cafe">Cafe Selfie</option>
     <option value="campus">Campus Selfie</option>
+    <option value="grid4_cute">4-Grid Cute Selfie</option>
+<option value="grid4_natural">4-Grid Natural Selfie</option>
+<option value="grid4_beauty">4-Grid Beauty Selfie</option>
   </select>
     </div>
     <div class="field full"><label>Aktivitas</label><select id="aktivitas"></select></div>
@@ -3608,7 +3611,33 @@ const SELFIE_PRESETS = {
     angle: "slightly high angle",
     lens: "26mm smartphone front camera",
     style: "realistic Indonesian campus selfie"
-  }
+  },
+  grid4_cute: {
+  aktivitas: "taking four casual smartphone selfies with slightly different cute expressions",
+  lighting: "soft diffused indoor daylight",
+  framing: "close-up selfie portrait",
+  angle: "slightly high angle",
+  lens: "26mm smartphone front camera",
+  style: "natural Indonesian social-media selfie collage photography"
+},
+
+grid4_natural: {
+  aktivitas: "taking four natural casual smartphone selfies with subtle expression changes",
+  lighting: "soft natural daylight",
+  framing: "close-up selfie portrait",
+  angle: "slightly high angle",
+  lens: "26mm smartphone front camera",
+  style: "realistic Indonesian everyday selfie collage photography"
+},
+
+grid4_beauty: {
+  aktivitas: "taking four beauty-style smartphone selfies with slight pose variations",
+  lighting: "soft flattering indoor daylight",
+  framing: "close-up selfie portrait",
+  angle: "slightly high angle",
+  lens: "26mm smartphone front camera",
+  style: "soft beauty selfie collage photography with realistic Indonesian appearance"
+}
 };
 
 function setSelfieField(id, value) {
@@ -3640,6 +3669,22 @@ if (selfiePresetEl) {
     setSelfieField("angle", preset.angle);
     setSelfieField("lens", preset.lens);
     setSelfieField("style", preset.style);
+    if (this.value === "grid4_cute" || this.value === "grid4_natural" || this.value === "grid4_beauty") {
+  setVal("mode_output", "Expression Sheet");
+  setVal("layout", "square 1:1");
+
+  if (this.value === "grid4_cute") {
+    setChecks("ekspresi_sheet", ["Gentle Smile", "Happy", "Surprised", "Neutral"]);
+  } else if (this.value === "grid4_natural") {
+    setChecks("ekspresi_sheet", ["Neutral", "Gentle Smile", "Happy", "Tired"]);
+  } else if (this.value === "grid4_beauty") {
+    setChecks("ekspresi_sheet", ["Neutral", "Gentle Smile", "Happy", "Surprised"]);
+  }
+      setSelfieField(
+  "style",
+  preset.style + ", clean 2x2 equal grid collage, four equal selfie panels, exact same person in all four panels, same outfit, same hairstyle, same lighting, same background, only expression and head angle change"
+);
+}
   });
 }
 </script>
